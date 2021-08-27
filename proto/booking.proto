@@ -1,0 +1,58 @@
+syntax = "proto3";
+package booking;
+option go_package = "./;pb";
+
+import "empty.proto";
+import "flight.proto";
+import "customer.proto";
+
+service Bbooking {
+    rpc AssignBooking(AssignBookingRequest) returns (Booking);
+    rpc UpdateBooking(Booking) returns (Booking);
+    rpc GetBookingByID(GetBookingByIDRequest) returns (Booking);
+    rpc ViewBookings(ViewBookingRequest) returns (ViewBookingReponse);
+    rpc DeleteBooking(DeleteBookingRequest) returns (Empty);
+    rpc ListBooking(ListBookingRequest) returns (ListBookingResponse);
+}
+ message Booking {
+     string id =1;
+     string customer_id = 2;
+     string flight_id = 3;
+     string code = 4;
+     string status = 5;
+     string book_date = 6;    
+ }
+
+message GetBookingByIDRequest{
+    string id = 1;
+}
+
+ message AssignBookingRequest {
+    string customer_id = 1;
+    string flight_id = 2;
+    string status = 3;
+    string code = 4;
+    string book_date = 5;
+}
+
+ message ViewBookingRequest {
+    string code = 1;
+    string customer_id = 2;
+}
+message ViewBookingReponse{
+    string code = 1;
+    string book_date = 2;
+    Customer customer = 3;
+    Flight flight = 4;
+}
+
+message ListBookingRequest {
+    string customer_id = 1;
+}
+message ListBookingResponse {
+    repeated Booking Bookings = 1;
+}
+
+message DeleteBookingRequest {
+    string id = 1;
+}

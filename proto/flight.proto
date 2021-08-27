@@ -1,0 +1,44 @@
+syntax = "proto3";
+package booking;
+option go_package = "./;pb";
+
+import "empty.proto";
+
+service BookingFlight {
+    rpc CreateFlight(Flight) returns (Flight);
+    rpc UpdateFlight(Flight) returns (Flight);
+    rpc FindFlight(FindFlightRequest) returns (Flight);
+    rpc GetFlightID(GetFlightIDRequest) returns (Flight);
+    rpc DeleteFlight(DeleteFlightRequest) returns (Empty);
+    rpc ListFlight(ListFlightRequest) returns (ListFlightResponse);
+}
+message Flight {
+string	id = 1;
+string	name = 2;        
+string	from = 3;    
+string	to = 4; 
+string	date = 5;
+string	status = 6;
+int64	available_slot = 7;
+}
+
+message GetFlightIDRequest{
+    string id = 1;
+}
+message FindFlightRequest {
+    string name = 1;        
+    string from = 2;    
+    string to = 3; 
+    string date = 4;
+}
+
+message ListFlightRequest {
+    string name = 1;
+}
+message ListFlightResponse {
+    repeated Flight Flights = 1;
+}
+
+message DeleteFlightRequest {
+    string id = 1;
+}
