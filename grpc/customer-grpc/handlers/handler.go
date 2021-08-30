@@ -42,6 +42,7 @@ func (h *CustomerHandler) CreateCustomer(ctx context.Context, in *pb.Customer) (
 	}
 
 	pResponse := &pb.Customer{
+		Id:          customer.ID.String(),
 		Name:        customer.Name,
 		Address:     customer.Address,
 		LicenseId:   customer.License_id,

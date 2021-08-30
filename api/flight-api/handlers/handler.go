@@ -45,8 +45,12 @@ func (h *flightHandler) CreateFlight(c *gin.Context) {
 	}
 
 	pReq := &pb.Flight{
-
-		Name: req.Name,
+		Name:          req.Name,
+		From:          req.From,
+		To:            req.To,
+		Date:          req.Date,
+		Status:        req.Status,
+		AvailableSlot: int64(req.Available_slot),
 	}
 
 	pRes, err := h.flightClient.CreateFlight(c.Request.Context(), pReq)
